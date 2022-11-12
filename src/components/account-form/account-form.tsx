@@ -9,9 +9,6 @@ function AccountForm(): JSX.Element {
   const formValidator = useMemo(() => getAccountFormValidator(getValues), [getValues]); 
   const onSubmit: SubmitHandler<AccountFormFields> = data => console.log(data);
 
-
-  console.log(errors);
-
   return (
     <form className = 'form' onSubmit = { handleSubmit(onSubmit) }>
       <input type="text" {...register('nickname', {...formValidator['nickname']})} />

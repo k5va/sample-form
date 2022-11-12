@@ -23,8 +23,8 @@ const validatePassword = (password: string) => {
   return true;
 };
 
-const validatePassword2 = (password: string) => 
-  (password2: string) => password2 === password || 'Passwords must match';
+const validatePassword2 = (getValues: UseFormGetValues<AccountFormFields>) => 
+  (password2: string) => password2 === getValues('password') || 'Passwords must match';
 
 export const getAccountFormValidator = (getValues: UseFormGetValues<AccountFormFields>): {
   [V in keyof AccountFormFields]: AccountFormValidator;
@@ -59,7 +59,7 @@ export const getAccountFormValidator = (getValues: UseFormGetValues<AccountFormF
     },
     password2: { 
       required: 'Обязательное поле', 
-      validate: validatePassword2(getValues('password')),
+      validate: validatePassword2(getValues),
     },
   };
 }
