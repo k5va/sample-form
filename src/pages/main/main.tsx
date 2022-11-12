@@ -1,4 +1,4 @@
-import { Form } from '../../components';
+import { AccountForm } from '../../components';
 import './main.scss';
 
 function Main(): JSX.Element {
@@ -6,7 +6,7 @@ function Main(): JSX.Element {
     <>
       <header></header>
         <main className='container'>
-          <Form />
+          <AccountForm />
         </main>
       <footer></footer>
     </>
