@@ -2,14 +2,23 @@ import { useMemo } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { Button, MenuItem } from '@mui/material';
 import { AccountFormFields } from './types';
-import { getAccountFormValidator } from './validator';
+import { getAccountFormValidator } from './utils/validator';
+import { createAccountDTO } from './utils/create-account-dto';
 import { FormTextField, FormSelect } from '../../components';
 import './account-form.scss';
 
 function AccountForm(): JSX.Element {
-  const { handleSubmit, getValues, control } = useForm<AccountFormFields>();
-  const formValidator = useMemo(() => getAccountFormValidator(getValues), [getValues]); 
-  const onSubmit: SubmitHandler<AccountFormFields> = data => console.log(data);
+  const { handleSubmit, getValues, control } = useForm<AccountFormFields>({
+    defaultValues: {
+      nickname: '',
+      degree: 'master_it',
+      email: '',
+      password: '',
+      password2: '',
+    }
+  });
+  const formValidator = useMemo(() => getAccountFormValidator(getValues), [getValues]); // TODO: remove memo?
+  const onSubmit: SubmitHandler<AccountFormFields> = data => console.log(createAccountDTO(data));
 
   return (
     <form className = 'form' onSubmit = { handleSubmit(onSubmit) }>

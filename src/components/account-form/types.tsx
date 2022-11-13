@@ -9,3 +9,5 @@ export type AccountFormFields = {
 };
 
 export type AccountFormValidator = Pick<RegisterOptions<AccountFormFields>, 'required' | 'maxLength' | 'minLength' | 'validate'>;
+
+export type AccountDTO = Omit<AccountFormFields, 'password2'>;

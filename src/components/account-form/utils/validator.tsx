@@ -1,6 +1,6 @@
 import { UseFormGetValues } from 'react-hook-form';
-import { MAX_FIELD_LENGTH, MIN_PASSWORD_LENGTH } from './const';
-import { AccountFormFields, AccountFormValidator } from './types';
+import { MAX_FIELD_LENGTH, MIN_PASSWORD_LENGTH } from '../const';
+import { AccountFormFields, AccountFormValidator } from '../types';
 
 const validatePassword = (password: string) => {
   

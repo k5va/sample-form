@@ -1,9 +1,9 @@
-import { Control } from 'react-hook-form';
-import { AccountFormFields, AccountFormValidator } from '../account-form/types';
+import { Control, FieldValues } from 'react-hook-form';
+import { AccountFormValidator } from '../account-form/types';
 
-export type FormTextFieldProps = {
-  name: keyof AccountFormFields, 
+export type FormTextFieldProps<T extends FieldValues> = {
+  name: keyof T, 
   label: string, 
-  control: Control<AccountFormFields, any>; 
+  control: Control<T>; 
   validator: AccountFormValidator,
 };
