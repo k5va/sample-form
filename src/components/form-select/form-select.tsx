@@ -1,5 +1,5 @@
 import { Controller } from 'react-hook-form';
-import { Select } from '@mui/material';
+import { InputLabel, Select } from '@mui/material';
 import { FormSelectProps } from './types';
 
 function FormSelect({ name, label, control, validator, children }: FormSelectProps): JSX.Element {
@@ -12,17 +12,19 @@ function FormSelect({ name, label, control, validator, children }: FormSelectPro
           field: { onChange, onBlur, value, name, ref },
           fieldState: { error },
         }) => (
-          <Select
-            id={name}
-            label={label}
-            value={value}
-            onChange={onChange}
-            onBlur={onBlur}
-            inputRef={ref}
-            error={!!error}
-          >
-            {children}
-          </Select>
+          <>
+            <InputLabel htmlFor={name}>{label}</InputLabel>
+            <Select
+              id={name}
+              value={value}
+              onChange={onChange}
+              onBlur={onBlur}
+              inputRef={ref}
+              error={!!error}
+            >
+              {children}
+            </Select>
+          </>
         )}
       />
   );
