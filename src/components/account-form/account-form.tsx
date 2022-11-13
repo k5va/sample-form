@@ -35,14 +35,7 @@ function AccountForm(): JSX.Element {
         <FormTextField name='password' label='Password' control={control} validator={formValidator['password']} />
         <FormTextField name='password2' label='Re-enter password' control={control} validator={formValidator['password2']} />
 
-        <Button 
-          sx={{
-            borderRadius: '30px',
-          }}
-          variant='contained'
-          type="submit"
-        >Create account
-        </Button>
+        <Button type="submit">Create account</Button>
       </form>
     </section>
   );

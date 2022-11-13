@@ -16,7 +16,6 @@ function FormTextField<T extends FieldValues>({ name, label, control, validator 
             <InputLabel htmlFor={name}>{label}</InputLabel>
             <TextField
               id={name}
-              hiddenLabel
               name={name}
               value={value}
               onChange={onChange}
