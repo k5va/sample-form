@@ -1,4 +1,4 @@
-import { Control, Controller, FieldValues } from 'react-hook-form';
+import { Controller, FieldValues } from 'react-hook-form';
 import { InputLabel, TextField } from '@mui/material';
 import { FormTextFieldProps } from './types';
 import { useState } from 'react';
@@ -8,8 +8,8 @@ function FormTextField<T extends FieldValues>({ name, label, control, validator 
 
   return (
     <Controller
-        name={name.toString()}
-        control={control as Control} // TODO: Why needs type assertion?
+        name={name}
+        control={control}
         rules={validator}
         render={({
           field: {onChange, value, name, ref},
