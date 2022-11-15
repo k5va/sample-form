@@ -1,34 +1,34 @@
 import { Controller } from 'react-hook-form';
-import { InputLabel, Select } from '@mui/material';
+import { FormControl, InputLabel, Select } from '@mui/material';
 import { FormSelectProps } from './types';
-import { useState } from 'react';
 
 function FormSelect({ name, label, control, validator, children }: FormSelectProps): JSX.Element {
-  const [isFocused, setFocused] = useState(false);
-
+  const labelId = `${label}-label`;
+  
   return (
     <Controller
         control={control}
         name={name}
         rules={validator}
         render={({
-          field: {onChange, value, name, ref},
+          field: {onChange, onBlur, value, name, ref},
           fieldState: {error},
         }) => (
-          <>
-            <InputLabel error={!!error} focused={isFocused} htmlFor={name}>{label}</InputLabel>
+          <FormControl>
+            <InputLabel id={labelId}>{label}</InputLabel>
             <Select
               id={name}
               value={value}
+              label={label}
+              labelId={labelId}
               onChange={onChange}
-              onBlur={() => setFocused(false)}
-              onFocus={() => setFocused(true)}
+              onBlur={onBlur}
               inputRef={ref}
               error={!!error}
             >
               {children}
             </Select>
-          </>
+          </FormControl>
         )}
       />
   );
