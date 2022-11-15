@@ -1,34 +1,28 @@
 import { Controller, FieldValues } from 'react-hook-form';
-import { InputLabel, TextField } from '@mui/material';
+import { TextField } from '@mui/material';
 import { FormTextFieldProps } from './types';
-import { useState } from 'react';
 
 function FormTextField<T extends FieldValues>({ name, label, control, validator }: FormTextFieldProps<T>): JSX.Element {
-  const [isFocused, setFocused] = useState(false); // TODO: is it OK
-
-  return (
+  return ( // TODO: useControler
     <Controller
         name={name}
         control={control}
         rules={validator}
         render={({
-          field: {onChange, value, name, ref},
+          field: {onChange, onBlur, value, name, ref},
           fieldState: {error},
         }) => (
-          <>
-            <InputLabel error={!!error} focused={isFocused} htmlFor={name}>{label}</InputLabel>
-            <TextField
-              id={name}
-              name={name}
-              value={value}
-              onChange={onChange}
-              onBlur={() => setFocused(false)}
-              inputRef={ref}
-              error={!!error}
-              helperText={error?.message}
-              onFocus={() => setFocused(true)}
-            />
-          </>
+          <TextField
+            id={name}
+            name={name}
+            value={value}
+            label={label}
+            onChange={onChange}
+            onBlur={onBlur}
+            inputRef={ref}
+            error={!!error}
+            helperText={error?.message}
+          />
         )}
       />
   );
