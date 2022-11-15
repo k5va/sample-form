@@ -6,4 +6,5 @@ export type FormTextFieldProps<T extends FieldValues> = {
   label: string, 
   control: Control<T>; 
   validator: AccountFormValidator,
+  className?: string,
 };

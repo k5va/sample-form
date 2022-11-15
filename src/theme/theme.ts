@@ -3,8 +3,9 @@ import { createTheme } from '@mui/material';
 const inputHeight = '52px';
 const inputPaddingHorizontal = '0.75rem';
 
-const labelInputText = {
+const textStyles = {
   fontSize: '1.0625rem',
+  fontWeight: '400',
   lineHeight: '1.25rem',
 };
 
@@ -15,6 +16,11 @@ export const theme = createTheme({
     }
   },
   components: {
+    MuiFormControl: {
+      defaultProps: {
+        fullWidth: true,
+      }
+    },
     MuiSelect: {
       defaultProps: {
         fullWidth: true,
@@ -28,7 +34,7 @@ export const theme = createTheme({
     MuiInputLabel: {
       styleOverrides: {
         root: {
-          ...labelInputText,
+          ...textStyles,
           position: 'static',
           transform: 'none',
           marginBottom: '0.625rem',
@@ -49,7 +55,7 @@ export const theme = createTheme({
           },
         },
         input: {
-          ...labelInputText,
+          ...textStyles,
           boxSizing: 'border-box',
           height: '100%',
         },
@@ -81,8 +87,10 @@ export const theme = createTheme({
       },
       styleOverrides: {
         root: {
+          ...textStyles,
           borderRadius: '30px',
-          textTransform: 'none'
+          textTransform: 'none',
+          padding: '1rem 2.5rem',
         },
       }
     }

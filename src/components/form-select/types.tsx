@@ -7,4 +7,5 @@ export type FormSelectProps = PropsWithChildren<{
   label: string, 
   control: Control<AccountFormFields, any>; 
   validator: AccountFormValidator,
+  className?: string,
 }>;

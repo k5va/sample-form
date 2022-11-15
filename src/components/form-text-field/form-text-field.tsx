@@ -2,7 +2,7 @@ import { Controller, FieldValues } from 'react-hook-form';
 import { TextField } from '@mui/material';
 import { FormTextFieldProps } from './types';
 
-function FormTextField<T extends FieldValues>({ name, label, control, validator }: FormTextFieldProps<T>): JSX.Element {
+function FormTextField<T extends FieldValues>({ name, label, control, validator, className }: FormTextFieldProps<T>): JSX.Element {
   return ( // TODO: useControler
     <Controller
         name={name}
@@ -12,17 +12,19 @@ function FormTextField<T extends FieldValues>({ name, label, control, validator 
           field: {onChange, onBlur, value, name, ref},
           fieldState: {error},
         }) => (
-          <TextField
-            id={name}
-            name={name}
-            value={value}
-            label={label}
-            onChange={onChange}
-            onBlur={onBlur}
-            inputRef={ref}
-            error={!!error}
-            helperText={error?.message}
-          />
+          <div className={className}>
+            <TextField
+              id={name}
+              name={name}
+              value={value}
+              label={label}
+              onChange={onChange}
+              onBlur={onBlur}
+              inputRef={ref}
+              error={!!error}
+              helperText={error?.message}
+            />
+          </div>
         )}
       />
   );
