@@ -4,11 +4,13 @@ import { Button, MenuItem, Typography } from '@mui/material';
 import { AccountFormFields } from './types';
 import { getAccountFormValidator } from './utils/validator';
 import { createAccountDTO } from './utils/create-account-dto';
-import { FormTextField, FormSelect } from '../../components';
+import { FormTextField, FormSelect, FormPassword } from '../../components';
 import './account-form.scss';
 
 function AccountForm(): JSX.Element {
   const { handleSubmit, getValues, control } = useForm<AccountFormFields>({
+    mode: 'onChange',
+    criteriaMode: 'all',
     defaultValues: {
       nickname: '',
       degree: 'master_it',
@@ -31,8 +33,16 @@ function AccountForm(): JSX.Element {
           <MenuItem value="master_art">Master’s in Arts</MenuItem>
         </FormSelect>
         <FormTextField className='account-form__form-item' name='email' label='Email address' control={control} validator={formValidator['email']} />
-        <FormTextField className='account-form__form-item' name='password' label='Password' control={control} validator={formValidator['password']} />
-        <FormTextField className='account-form__form-item' name='password2' label='Re-enter password' control={control} validator={formValidator['password2']} />
+        
+        <FormPassword 
+          className='account-form__form-item' 
+          name1='password' 
+          name2='password2' 
+          label='Password' 
+          control={control} 
+          validator1={formValidator['password']} 
+          validator2={formValidator['password2']} 
+        />
 
         <Button className='account-form__form-item account-form__form-submit' type="submit">Create account</Button>
       </form>

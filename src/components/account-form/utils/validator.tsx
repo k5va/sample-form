@@ -2,29 +2,29 @@ import { UseFormGetValues } from 'react-hook-form';
 import { MAX_FIELD_LENGTH, MIN_PASSWORD_LENGTH } from '../const';
 import { AccountFormFields, AccountFormValidator } from '../types';
 
-const validatePassword = (password: string) => {
-  
-  if (!password.match(/[А-ЯA-Z]/)) {
-    return 'Пароль должен содержать минимум одну большую букву';
-  }
-
-  if (!password.match(/[а-яa-z]/)) {
-    return 'Пароль должен содержать минимум одну маленькую букву';
-  }
-
-  if (!password.match(/[\d]/)) {
-    return 'Пароль должен содержать минимум одну цифру';
-  }
-
-  if (!password.match(/[!@#?]/)) {
-    return 'Пароль должен содержать минимум один специальный символ !@#?';
-  }
-  
-  return true;
+export enum PasswordError {
+  MinLength = 'MinLength',
+  MaxLength = 'MaxLength',
+  UpperAndLowerCase = 'UpperAndLowerCaseLetters',
+  OneNumber = 'OneNumber',
+  SpecialChar = 'SpecialChar',
+  MustMatch = 'Passwords must match',
 };
 
+type PasswordValidator = {
+  [validator: string]: (value: string) => boolean | PasswordError
+}
+
+const passwordValidator: PasswordValidator = {
+  minLength: (value) => value.length >= MIN_PASSWORD_LENGTH || PasswordError.MinLength,
+  maxLength: (value) => value.length <= MAX_FIELD_LENGTH || PasswordError.MaxLength,
+  caseLetters: (value) => !!value.match(/[А-ЯA-Z]/) || PasswordError.UpperAndLowerCase,
+  oneNumber: (value) => !!value.match(/[\d]/) || PasswordError.OneNumber,
+  specialChar: (value) => !!value.match(/[!@#?]/) || PasswordError.SpecialChar,
+}
+
 const validatePassword2 = (getValues: UseFormGetValues<AccountFormFields>) => 
-  (password2: string) => password2 === getValues('password') || 'Passwords must match';
+  (password2: string) => password2 === getValues('password') || PasswordError.MustMatch;
 
 export const getAccountFormValidator = (getValues: UseFormGetValues<AccountFormFields>): {
   [V in keyof AccountFormFields]: AccountFormValidator;
@@ -45,21 +45,11 @@ export const getAccountFormValidator = (getValues: UseFormGetValues<AccountFormF
         message: `Длина не больше ${MAX_FIELD_LENGTH}`,
       },
     },
-    password: { 
-      required: 'Обязательное поле', 
-      minLength: {
-        value: MIN_PASSWORD_LENGTH,
-        message: `Длина не меньше ${MIN_PASSWORD_LENGTH}`,
-      },
-      maxLength: {
-        value: MAX_FIELD_LENGTH,
-        message: `Длина не больше ${MAX_FIELD_LENGTH}`,
-      },
-      validate: validatePassword,
+    password: {
+      validate: passwordValidator,
     },
-    password2: { 
-      required: 'Обязательное поле', 
+    password2: {
       validate: validatePassword2(getValues),
-    },
+    }
   };
 }
