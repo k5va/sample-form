@@ -8,7 +8,7 @@ function FormPassword<T extends FieldValues>({name1, name2, label, control, vali
   const {errors, isDirty} = useFormState({control, name: name1});
 
   const errorTypes = errors[name1]?.types;
-  const activeErrors = errorTypes ? Object.values(errorTypes) : [];
+  const activeErrors = errorTypes ? Object.keys(errorTypes) : [];
 
   console.log(isDirty, errors);
 
@@ -18,9 +18,9 @@ function FormPassword<T extends FieldValues>({name1, name2, label, control, vali
       <FormTextField name={name2} label={'Re-enter password'} control={control} validator={validator2} />
       <List>
         <ListItem disablePadding selected={isDirty && !activeErrors.includes(PasswordError.MinLength)}>
-          <ListItemText primary="At list 12 characters" />
+          <ListItemText primary="At least 12 characters" />
         </ListItem>
-        <ListItem disablePadding selected={isDirty && !activeErrors.includes(PasswordError.UpperAndLowerCase)}>
+        <ListItem disablePadding selected={isDirty && !activeErrors.includes(PasswordError.LettersCase)}>
           <ListItemText primary="A mixture of both uppercase and lowercase letters." />
         </ListItem>
         <ListItem disablePadding selected={isDirty && !activeErrors.includes(PasswordError.OneNumber)}>
