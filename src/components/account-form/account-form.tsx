@@ -17,7 +17,7 @@ function AccountForm(): JSX.Element {
       password2: '',
     }
   });
-  const formValidator = useMemo(() => getAccountFormValidator(getValues), [getValues]); // TODO: remove memo?
+  const formValidator = useMemo(() => getAccountFormValidator(getValues), [getValues]);
   const onSubmit: SubmitHandler<AccountFormFields> = data => console.log(createAccountDTO(data));
 
   return (

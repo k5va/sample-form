@@ -35,6 +35,7 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           ...textStyles,
+          color: '#000',
           position: 'static',
           transform: 'none',
           marginBottom: '0.625rem',
@@ -47,7 +48,7 @@ export const theme = createTheme({
         root: {
           height: inputHeight,
           transition: 'color 0.3s, border-color 0.3s',
-          border: '1px solid black',
+          border: '1px solid #AFAEBE',
 
           '&.Mui-focused': {
             borderColor: '#4765F6',

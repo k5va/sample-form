@@ -1,5 +1,5 @@
 import { useController } from 'react-hook-form';
-import { FormControl, InputLabel, Select } from '@mui/material';
+import { FormControl, InputLabel, Select, StyledEngineProvider } from '@mui/material';
 import { FormSelectProps } from './types';
 
 function FormSelect({ name, label, control, validator, children, className }: FormSelectProps): JSX.Element {
@@ -10,8 +10,8 @@ function FormSelect({ name, label, control, validator, children, className }: Fo
   } = useController({name, control, rules: validator});
 
   return (
-    <div className={className}>
-      <FormControl>
+    <StyledEngineProvider injectFirst>
+      <FormControl className={className}>
         <InputLabel id={labelId}>{label}</InputLabel>
         <Select
           id={name}
@@ -26,7 +26,7 @@ function FormSelect({ name, label, control, validator, children, className }: Fo
           {children}
         </Select>
       </FormControl>
-    </div>
+    </StyledEngineProvider>
   );
 }
 

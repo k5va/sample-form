@@ -1,5 +1,5 @@
 import { FieldValues, useController } from 'react-hook-form';
-import { TextField } from '@mui/material';
+import { StyledEngineProvider, TextField } from '@mui/material';
 import { FormTextFieldProps } from './types';
 
 function FormTextField<T extends FieldValues>({ name, label, control, validator, className }: FormTextFieldProps<T>): JSX.Element {
@@ -9,7 +9,7 @@ function FormTextField<T extends FieldValues>({ name, label, control, validator,
   } = useController({name, control, rules: validator});
   
   return (
-    <div className={className}>
+    <StyledEngineProvider injectFirst>
       <TextField
         id={name}
         name={name}
@@ -20,8 +20,9 @@ function FormTextField<T extends FieldValues>({ name, label, control, validator,
         inputRef={ref}
         error={!!error}
         helperText={error?.message}
+        className={className}
       />
-    </div>
+    </StyledEngineProvider>
   );
 }
 
