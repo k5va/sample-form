@@ -9,7 +9,7 @@ function FormPassword<T extends FieldValues>(
 ): JSX.Element {
   
   const {errors, dirtyFields} = useFormState({control, name: mainName});
-  const { trigger } = useFormContext();
+  const {trigger} = useFormContext();
 
   const errorTypes = errors[mainName]?.types;
   const activeErrors = errorTypes ? Object.keys(errorTypes) : [];
@@ -20,8 +20,8 @@ function FormPassword<T extends FieldValues>(
 
   return (
     <div className={className}>
-      <FormTextField name={mainName} label={mainLabel} control={control} validator={mainValidator} onChange={password1ChangeHandler} />
-      <FormTextField name={copyName} label={copyLabel} control={control} validator={copyValidator} />
+      <FormTextField type='password' name={mainName} label={mainLabel} control={control} validator={mainValidator} onChange={password1ChangeHandler} />
+      <FormTextField type='password' name={copyName} label={copyLabel} control={control} validator={copyValidator} />
       <List>
         <ListItem disablePadding selected={isPassword1Dirty && !activeErrors.includes(PasswordError.MinLength)}>
           <ListItemText primary="At least 12 characters" />
