@@ -1,7 +1,9 @@
 import { createTheme } from '@mui/material';
 
-const inputHeight = '52px';
-const inputPaddingHorizontal = '0.75rem';
+const INPUT_HEIGHT = '52px';
+const INPUT_PADDING_HORIZONTAL = '0.75rem';
+const ERROR_COLOR = '#d32f2f';
+const FOCUSED_COLOR = '#4765F6';
 
 const textStyles = {
   fontSize: '1.0625rem',
@@ -12,7 +14,7 @@ const textStyles = {
 export const theme = createTheme({
   palette: {
     primary: {
-      main: '#4765F6',
+      main: FOCUSED_COLOR,
     }
   },
   components: {
@@ -46,13 +48,17 @@ export const theme = createTheme({
     MuiInputBase: {
       styleOverrides: {
         root: {
-          height: inputHeight,
+          height: INPUT_HEIGHT,
           transition: 'color 0.3s, border-color 0.3s',
           border: '1px solid #AFAEBE',
 
           '&.Mui-focused': {
-            borderColor: '#4765F6',
-            color: '#4765F6',
+            borderColor: FOCUSED_COLOR,
+            color: FOCUSED_COLOR,
+          },
+          '&.Mui-error': {
+            borderColor: ERROR_COLOR,
+            color: ERROR_COLOR,
           },
         },
         input: {
@@ -71,7 +77,7 @@ export const theme = createTheme({
           borderRadius: '6px',
         },
         input: {
-          padding: '0 ' + inputPaddingHorizontal,
+          padding: '0 ' + INPUT_PADDING_HORIZONTAL,
         },
         notchedOutline: {
           display: 'none',
