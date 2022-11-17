@@ -28,12 +28,19 @@ const validatePassword: () => {validate: PasswordValidator} = () => ({
 const validatePassword2 = (getValues: UseFormGetValues<AccountFormFields>) => (
   {validate: (password2: string) => password2 === getValues('password') || PasswordError.MustMatch});
 
-const validateRequired = () => ({required: 'Required field'});
+const validateRequired = () => ({required: 'Enter field value'});
 
 const validateMaxLength = () => ({maxLength: {
   value: MAX_FIELD_LENGTH,
   message: `Must contain not more than ${MAX_FIELD_LENGTH} characters`,
 }});
+
+const validateEmail = () => ({
+  pattern: {
+    value: /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+    message: 'Email is not valid'
+  },
+});
 
 export const getAccountFormValidator = (getValues: UseFormGetValues<AccountFormFields>): {
   [V in keyof AccountFormFields]: AccountFormValidator;
@@ -48,7 +55,8 @@ export const getAccountFormValidator = (getValues: UseFormGetValues<AccountFormF
     },
     email: {
       ...validateRequired(), 
-      ...validateMaxLength(), 
+      ...validateMaxLength(),
+      ...validateEmail(),
     },
     password: {
       ...validatePassword(),
