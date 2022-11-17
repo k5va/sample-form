@@ -7,4 +7,5 @@ export type FormTextFieldProps<T extends FieldValues> = {
   control: Control<T>; 
   validator: AccountFormValidator,
   className?: string,
+  onChange?: (value: string) => void,
 };
