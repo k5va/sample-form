@@ -27,7 +27,7 @@ function FormPassword<T extends FieldValues>(
   return (
     <StyledEngineProvider injectFirst>
       <FormTextField 
-        type={isPasswordVisible ? 'password' : 'text'} 
+        type={isPasswordVisible ? 'text' : 'password'} 
         name={mainName} 
         label={mainLabel} 
         control={control} 
@@ -42,13 +42,13 @@ function FormPassword<T extends FieldValues>(
                   onClick={showPasswordHandler}
                   edge="end"
                 >
-                  {isPasswordVisible ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                  {isPasswordVisible ? <VisibilityIcon /> : <VisibilityOffIcon />}
                 </IconButton>
             </InputAdornment>
         }}
       />
       <FormTextField 
-        type={isPasswordVisible ? 'password' : 'text'} 
+        type={isPasswordVisible ? 'text' : 'password'} 
         name={copyName} 
         label={copyLabel} 
         control={control} 
@@ -62,7 +62,7 @@ function FormPassword<T extends FieldValues>(
                   onClick={showPasswordHandler}
                   edge="end"
                 >
-                  {isPasswordVisible ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                  {isPasswordVisible ? <VisibilityIcon /> : <VisibilityOffIcon />}
                 </IconButton>
             </InputAdornment>
         }}
