@@ -100,6 +100,11 @@ export const theme = createTheme({
         },
       }
     },
+    MuiList: {
+      defaultProps: {
+        disablePadding: true,
+      }
+    },
     MuiListItem: {
       defaultProps: {
         disablePadding: true,
@@ -118,6 +123,7 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           margin: '0',
+          fontSize: '13px',
         }
       }
     },
