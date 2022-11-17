@@ -38,12 +38,13 @@ function AccountForm(): JSX.Element {
           
           <FormPassword 
             className='account-form__form-item' 
-            name1='password' 
-            name2='password2' 
-            label='Password' 
+            mainName='password' 
+            copyName='password2' 
+            mainLabel='Password' 
+            copyLabel='Re-enter password' 
+            mainValidator={formValidator['password']} 
+            copyValidator={formValidator['password2']} 
             control={control} 
-            validator1={formValidator['password']} 
-            validator2={formValidator['password2']} 
           />
 
           <Button className='account-form__form-item account-form__form-submit' type="submit">Create account</Button>

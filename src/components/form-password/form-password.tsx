@@ -4,21 +4,24 @@ import { FormPasswordProps } from './types';
 import { FormTextField } from '../../components';
 import { PasswordError } from '../account-form/utils/validator';
 
-function FormPassword<T extends FieldValues>({name1, name2, label, control, validator1, validator2, className}: FormPasswordProps<T>): JSX.Element {
-  const {errors, dirtyFields} = useFormState({control, name: name1});
+function FormPassword<T extends FieldValues>(
+  {mainName, copyName, mainLabel, copyLabel, control, mainValidator, copyValidator, className}: FormPasswordProps<T>
+): JSX.Element {
+  
+  const {errors, dirtyFields} = useFormState({control, name: mainName});
   const { trigger } = useFormContext();
 
-  const errorTypes = errors[name1]?.types;
+  const errorTypes = errors[mainName]?.types;
   const activeErrors = errorTypes ? Object.keys(errorTypes) : [];
-  const isPassword1Dirty = !!dirtyFields[name1]
-  const isPassword2Dirty = !!dirtyFields[name2]
+  const isPassword1Dirty = !!dirtyFields[mainName]
+  const isPassword2Dirty = !!dirtyFields[copyName]
 
-  const password1ChangeHandler = () => trigger(name2);
+  const password1ChangeHandler = () => trigger(copyName);
 
   return (
     <div className={className}>
-      <FormTextField name={name1} label={label} control={control} validator={validator1} onChange={password1ChangeHandler} />
-      <FormTextField name={name2} label={'Re-enter password'} control={control} validator={validator2} />
+      <FormTextField name={mainName} label={mainLabel} control={control} validator={mainValidator} onChange={password1ChangeHandler} />
+      <FormTextField name={copyName} label={copyLabel} control={control} validator={copyValidator} />
       <List>
         <ListItem disablePadding selected={isPassword1Dirty && !activeErrors.includes(PasswordError.MinLength)}>
           <ListItemText primary="At least 12 characters" />
@@ -32,7 +35,7 @@ function FormPassword<T extends FieldValues>({name1, name2, label, control, vali
         <ListItem disablePadding selected={isPassword1Dirty && !activeErrors.includes(PasswordError.SpecialChar)}>
           <ListItemText primary="Inclusion of at least one special character, e.g., ! @ # ? ]" />
         </ListItem>
-        <ListItem disablePadding selected={isPassword2Dirty && !errors[name2]}>
+        <ListItem disablePadding selected={isPassword2Dirty && !errors[copyName]}>
           <ListItemText primary="Passwords must match" />
         </ListItem>
       </List>
