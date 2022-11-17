@@ -1,8 +1,12 @@
 import { FieldValues, useFormContext, useFormState } from 'react-hook-form';
-import { List, ListItem, ListItemText } from '@mui/material';
 import { FormPasswordProps } from './types';
 import { FormTextField } from '../../components';
 import { PasswordError } from '../account-form/utils/validator';
+import { IconButton, InputAdornment, List, ListItem, ListItemText } from '@mui/material';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import { useState } from 'react';
+
 
 function FormPassword<T extends FieldValues>(
   {mainName, copyName, mainLabel, copyLabel, control, mainValidator, copyValidator, className}: FormPasswordProps<T>
@@ -10,6 +14,7 @@ function FormPassword<T extends FieldValues>(
   
   const {errors, dirtyFields} = useFormState({control, name: mainName});
   const {trigger} = useFormContext();
+  const [isPasswordVisible, setPasswordVisible] = useState(false);
 
   const errorTypes = errors[mainName]?.types;
   const activeErrors = errorTypes ? Object.keys(errorTypes) : [];
@@ -17,11 +22,49 @@ function FormPassword<T extends FieldValues>(
   const isPassword2Dirty = !!dirtyFields[copyName]
 
   const password1ChangeHandler = () => trigger(copyName);
+  const showPasswordHandler = () => setPasswordVisible((isVisible) => !isVisible);
 
   return (
     <div className={className}>
-      <FormTextField type='password' name={mainName} label={mainLabel} control={control} validator={mainValidator} onChange={password1ChangeHandler} />
-      <FormTextField type='password' name={copyName} label={copyLabel} control={control} validator={copyValidator} />
+      <FormTextField 
+        type={isPasswordVisible ? 'password' : 'text'} 
+        name={mainName} 
+        label={mainLabel} 
+        control={control} 
+        validator={mainValidator} 
+        onChange={password1ChangeHandler} 
+        inputProps={{
+          endAdornment: 
+            <InputAdornment position="end">
+              <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={showPasswordHandler}
+                  edge="end"
+                >
+                  {isPasswordVisible ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                </IconButton>
+            </InputAdornment>
+        }}
+      />
+      <FormTextField 
+        type={isPasswordVisible ? 'password' : 'text'} 
+        name={copyName} 
+        label={copyLabel} 
+        control={control} 
+        validator={copyValidator}
+        inputProps={{
+          endAdornment: 
+            <InputAdornment position="end">
+              <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={showPasswordHandler}
+                  edge="end"
+                >
+                  {isPasswordVisible ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                </IconButton>
+            </InputAdornment>
+        }}
+      />
       <List>
         <ListItem disablePadding selected={isPassword1Dirty && !activeErrors.includes(PasswordError.MinLength)}>
           <ListItemText primary="At least 12 characters" />

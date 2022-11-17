@@ -60,9 +60,6 @@ export const theme = createTheme({
           boxSizing: 'border-box',
           height: '100%',
         },
-        adornedEnd: {
-          paddingRight: '0 !important',
-        },
       },
     },
     MuiOutlinedInput: {

@@ -2,7 +2,7 @@ import { FieldValues, useController } from 'react-hook-form';
 import { StyledEngineProvider, TextField } from '@mui/material';
 import { FormTextFieldProps } from './types';
 
-function FormTextField<T extends FieldValues>({name, type = 'text', label, control, validator, className, onChange}: FormTextFieldProps<T>): JSX.Element {
+function FormTextField<T extends FieldValues>({name, type = 'text', label, control, validator, className, onChange, inputProps}: FormTextFieldProps<T>): JSX.Element {
   const {
     field: {onChange: onFieldChange, onBlur, value, ref},
     fieldState: {error}
@@ -27,6 +27,7 @@ function FormTextField<T extends FieldValues>({name, type = 'text', label, contr
         error={!!error}
         helperText={error?.message}
         className={className}
+        InputProps={inputProps}
       />
     </StyledEngineProvider>
   );
