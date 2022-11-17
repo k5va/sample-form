@@ -4,6 +4,8 @@ const INPUT_HEIGHT = '52px';
 const INPUT_PADDING_HORIZONTAL = '0.75rem';
 const ERROR_COLOR = '#d32f2f';
 const FOCUSED_COLOR = '#4765F6';
+const RULE_FULFILLED_COLOR = '#AFAEBE';
+const RULE_BROKEN_COLOR = '#4765F6';
 
 const textStyles = {
   fontSize: '1.0625rem',
@@ -97,6 +99,27 @@ export const theme = createTheme({
           padding: '1rem 2.5rem',
         },
       }
-    }
-  }
+    },
+    MuiListItem: {
+      defaultProps: {
+        disablePadding: true,
+      },
+      styleOverrides: {
+        root: {
+          color: RULE_BROKEN_COLOR,
+          '&.Mui-selected': {
+            backgroundColor: 'transparent',
+            color: RULE_FULFILLED_COLOR,
+          }
+        }
+      }
+    },
+    MuiListItemText: {
+      styleOverrides: {
+        root: {
+          margin: '0',
+        }
+      }
+    },
+  },
 });
