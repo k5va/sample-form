@@ -66,7 +66,14 @@ function FormPassword<T extends FieldValues>(
             </InputAdornment>
         }}
       />
-      <List className={className}>
+      <List
+        sx={{
+          '& .MuiTypography-root': {
+            fontSize: '0.8125rem',
+          }
+        }}
+        className={className}
+      >
         <ListItem selected={isPassword1Dirty && !activeErrors.includes(PasswordError.MinLength)}>
           <ListItemText primary="At least 12 characters" />
         </ListItem>

@@ -123,7 +123,14 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           margin: '0',
-          fontSize: '13px',
+        }
+      }
+    },
+    MuiFormHelperText: {
+      styleOverrides: {
+        root: {
+          marginLeft: '0',
+          fontSize: '0.8125rem',
         }
       }
     },
