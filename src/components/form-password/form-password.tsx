@@ -2,7 +2,7 @@ import { FieldValues, useFormContext, useFormState } from 'react-hook-form';
 import { FormPasswordProps } from './types';
 import { FormTextField } from '../../components';
 import { PasswordError } from '../account-form/utils/validator';
-import { IconButton, InputAdornment, List, ListItem, ListItemText, StyledEngineProvider } from '@mui/material';
+import { IconButton, InputAdornment, List, ListItem, ListItemText } from '@mui/material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { useState } from 'react';
@@ -24,7 +24,7 @@ function FormPassword<T extends FieldValues>(
   const showPasswordHandler = () => setPasswordVisible((isVisible) => !isVisible);
 
   return (
-    <StyledEngineProvider injectFirst>
+    <>
       <FormTextField 
         type={isPasswordVisible ? 'text' : 'password'} 
         name={mainName} 
@@ -90,7 +90,7 @@ function FormPassword<T extends FieldValues>(
           <ListItemText primary="Passwords must match" />
         </ListItem>
       </List>
-    </StyledEngineProvider>
+    </>
   );
 }
 
