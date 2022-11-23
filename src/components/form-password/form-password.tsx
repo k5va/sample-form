@@ -16,7 +16,6 @@ function FormPassword<T extends FieldValues>(
   const [isPasswordVisible, setPasswordVisible] = useState(false);
 
   const errorTypes = errors[mainName]?.types;
-  const activeErrors = errorTypes ? Object.keys(errorTypes) : [];
   const isPassword1Dirty = !!dirtyFields[mainName]
   const isPassword2Dirty = !!dirtyFields[copyName]
 
@@ -74,16 +73,16 @@ function FormPassword<T extends FieldValues>(
         }}
         className={className}
       >
-        <ListItem selected={isPassword1Dirty && !activeErrors.includes(PasswordError.MinLength)}>
+        <ListItem selected={isPassword1Dirty && !errorTypes?.hasOwnProperty(PasswordError.MinLength)}>
           <ListItemText primary="At least 12 characters" />
         </ListItem>
-        <ListItem selected={isPassword1Dirty && !activeErrors.includes(PasswordError.LettersCase)}>
+        <ListItem selected={isPassword1Dirty && !errorTypes?.hasOwnProperty(PasswordError.LettersCase)}>
           <ListItemText primary="A mixture of both uppercase and lowercase letters." />
         </ListItem>
-        <ListItem selected={isPassword1Dirty && !activeErrors.includes(PasswordError.OneNumber)}>
+        <ListItem selected={isPassword1Dirty && !errorTypes?.hasOwnProperty(PasswordError.OneNumber)}>
           <ListItemText primary="Inclusion of at least one number." />
         </ListItem>
-        <ListItem selected={isPassword1Dirty && !activeErrors.includes(PasswordError.SpecialChar)}>
+        <ListItem selected={isPassword1Dirty && !errorTypes?.hasOwnProperty(PasswordError.SpecialChar)}>
           <ListItemText primary="Inclusion of at least one special character, e.g., ! @ # ? ]" />
         </ListItem>
         <ListItem selected={isPassword2Dirty && !errors[copyName]}>
