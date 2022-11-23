@@ -15,7 +15,7 @@ type PasswordValidator = {
   [validator: string]: (value: string) => boolean | string
 }
 
-const validatePassword: () => {validate: PasswordValidator} = () => ({
+const passwordValidator: {validate: PasswordValidator} = {
   validate: {
     [PasswordError.MinLength]: (value) => value.length >= MIN_PASSWORD_LENGTH || `Must contain at least ${MIN_PASSWORD_LENGTH} characters`,
     [PasswordError.MaxLength]: (value) => value.length <= MAX_FIELD_LENGTH || `Must contain not more than ${MAX_FIELD_LENGTH} characters`,
@@ -23,46 +23,46 @@ const validatePassword: () => {validate: PasswordValidator} = () => ({
     [PasswordError.OneNumber]: (value) => !!value.match(/[\d]/) || 'Must contain at least one number',
     [PasswordError.SpecialChar]: (value) => !!value.match(/[!@#?]/) || 'Must contain at least one special character, e.g., ! @ # ?',
   }
-});
+};
 
-const validatePassword2 = (getValues: UseFormGetValues<AccountFormFields>) => (
+const createPassword2Validator = (getValues: UseFormGetValues<AccountFormFields>) => (
   {validate: (password2: string) => password2 === getValues('password') || PasswordError.MustMatch});
 
-const validateRequired = () => ({required: 'Enter field value'});
+const requiredValidator = {required: 'Enter field value'};
 
-const validateMaxLength = () => ({maxLength: {
+const maxLengthValidator = {maxLength: {
   value: MAX_FIELD_LENGTH,
   message: `Must contain not more than ${MAX_FIELD_LENGTH} characters`,
-}});
+}};
 
-const validateEmail = () => ({
+const emailValidator = {
   pattern: {
     value: /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
     message: 'Email is not valid'
   },
-});
+};
 
 export const getAccountFormValidator = (getValues: UseFormGetValues<AccountFormFields>): {
   [V in keyof AccountFormFields]: AccountFormValidator;
 } => {
   return {
     nickname: { 
-      ...validateRequired(), 
-      ...validateMaxLength(), 
+      ...requiredValidator, 
+      ...maxLengthValidator, 
     },
     degree: { 
-      ...validateRequired() 
+      ...requiredValidator 
     },
     email: {
-      ...validateRequired(), 
-      ...validateMaxLength(),
-      ...validateEmail(),
+      ...requiredValidator, 
+      ...maxLengthValidator,
+      ...emailValidator,
     },
     password: {
-      ...validatePassword(),
+      ...passwordValidator,
     },
     password2: {
-      ...validatePassword2(getValues),
+      ...createPassword2Validator(getValues),
     }
   };
 }
