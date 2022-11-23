@@ -7,17 +7,19 @@ import { createAccountDTO } from './utils/create-account-dto';
 import { FormTextField, FormSelect, FormPassword } from '../../components';
 import './account-form.scss';
 
+const defaultValues: AccountFormFields = {
+  nickname: '',
+  degree: 'master_it',
+  email: '',
+  password: '',
+  password2: '',
+};
+
 function AccountForm(): JSX.Element {
   const methods = useForm<AccountFormFields>({
     mode: 'onChange',
     criteriaMode: 'all',
-    defaultValues: {
-      nickname: '',
-      degree: 'master_it',
-      email: '',
-      password: '',
-      password2: '',
-    }
+    defaultValues,
   });
   const {handleSubmit, getValues, control} = methods;
   const formValidator = useMemo(() => getAccountFormValidator(getValues), [getValues]);
