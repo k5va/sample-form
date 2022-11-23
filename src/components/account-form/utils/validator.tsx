@@ -19,9 +19,9 @@ const passwordValidator: {validate: PasswordValidator} = {
   validate: {
     [PasswordError.MinLength]: (value) => value.length >= MIN_PASSWORD_LENGTH || `Must contain at least ${MIN_PASSWORD_LENGTH} characters`,
     [PasswordError.MaxLength]: (value) => value.length <= MAX_FIELD_LENGTH || `Must contain not more than ${MAX_FIELD_LENGTH} characters`,
-    [PasswordError.LettersCase]: (value) => (!!value.match(/[А-ЯA-Z]/) && !!value.match(/[а-яa-z]/)) || 'Must contain at least one uppercase and one lowercase letter',
-    [PasswordError.OneNumber]: (value) => !!value.match(/[\d]/) || 'Must contain at least one number',
-    [PasswordError.SpecialChar]: (value) => !!value.match(/[!@#?]/) || 'Must contain at least one special character, e.g., ! @ # ?',
+    [PasswordError.LettersCase]: (value) => (Boolean(value.match(/[А-ЯA-Z]/)) && Boolean(value.match(/[а-яa-z]/))) || 'Must contain at least one uppercase and one lowercase letter',
+    [PasswordError.OneNumber]: (value) => Boolean(value.match(/[\d]/)) || 'Must contain at least one number',
+    [PasswordError.SpecialChar]: (value) => Boolean(value.match(/[!@#?]/)) || 'Must contain at least one special character, e.g., ! @ # ?',
   }
 };
 
